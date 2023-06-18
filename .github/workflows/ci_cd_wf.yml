@@ -1,5 +1,7 @@
 name: test
 
+permissions: write-all
+
 on:
   push:
     branches:
@@ -31,10 +33,10 @@ jobs:
       
       - name: Build coverage file
         run: |
-          pytest tests/test_calculator.py --cov=calculator --junitxml=pytest.xml --cov-report=term-missing:skip-covered | tee pytest-coverage.txt
+          python -m pytest --cov . --junitxml=pytest.xml --cov-report=term-missing:skip-covered | tee pytest-coverage.txt
       
       - name: Pytest coverage comment
         uses: MishaKav/pytest-coverage-comment@main
         with:
           pytest-coverage-path: ./pytest-coverage.txt
-          pytest-xml-coverage-path: ./coverage.xml
+          junitxml-path: ./pytest.xml
