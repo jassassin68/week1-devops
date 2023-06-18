@@ -27,10 +27,8 @@ jobs:
       - name: Run tests
         run: |
           python -m pytest -v tests
-      - name: Test Coverage - build coverage file
-        run: |
-          pytest --cov-report "xml:coverage.xml" --cov=src tests/
       - name: Pytest coverage comment
         uses: MishaKav/pytest-coverage-comment@main
         with:
-          pytest-xml-coverage-path: ./coverage.xml
+          pytest-coverage-path: ./pytest-coverage.txt
+          junitxml-path: ./pytest.xml
